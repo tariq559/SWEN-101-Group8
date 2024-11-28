@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Comparison Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: lightblue;
+            color: black;
+            margin: 0;
+            padding: 0;
+            border: 15px solid black; /* Changed border color to black */
+            border-radius: 15px;
+            max-width: 1200px;
+            margin: auto;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header img {
+            width: 100px;
+        }
+
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .digital-clock {
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .feature {
+            margin: 20px 0;
+        }
+
+        /* Styled Table */
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #ddd;
+        }
+
+        th {
+            background-color: #00BFFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        canvas {
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .tips {
+            margin: 20px auto;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tips-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .theme-button {
+            margin: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #00BFFF;
+            color: white;
+            font-size: 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-button:hover {
+            background-color: #0077cc;
+        }
+
+        .feedback button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .feedback button:hover {
+            background-color: #218838;
+        }
+
+        /* For the tips section */
+        .tips li {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .tips-title {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="assets/RIT_logo.png" alt="RIT Logo">
+        <div class="welcome">Welcome to the Climate Comparison Tool!</div>
+    </header>
+
+    <div class="digital-clock" id="digital-clock">Current Date & Time</div>
+
+    <div class="content">
+        <div class="feature">
+            <p><strong>Basic Climate Change Fact:</strong> The Earth's surface temperature is about <span id="temp-fact">1.2°C</span> warmer than it was in the late 1800s.</p>
+        </div>
+        <div class="feature">
+            <label for="temp-unit">Change Temperature Unit:</label>
+            <select id="temp-unit" onchange="updateTemperatures()">
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+            </select>
+        </div>
+        <div class="feature">
+            <p>Average weather for Rochester (Dec 1–7, 2024):</p>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Temperature</th>
+                    <th>Condition</th>
+                    <th>10 Years Ago</th>
+                </tr>
+                <tbody id="weather-table">
+                </tbody>
+            </table>
+        </div>
+        <div class="feature">
+            <canvas id="comparison-graph" width="600" height="400"></canvas>
+        </div>
+    </div>
+
+    <div class="tips">
+        <div class="tips-title">🌍 Tips to Help Reduce Climate Change</div>
+        <li>💧 Reduce water usage</li>
+        <li>♻️ Recycle more</li>
+        <li>🚲 Use bicycles for short trips</li>
+        <li>💡 Switch to LED bulbs</li>
+    </div>
+
+    <div>
+        <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+
+    <div class="feedback">
+        <p>Did you find this helpful?</p>
+        <button onclick="showFireworks()">Yes</button>
+        <button>No</button>
+    </div>
+
+    <script>
+        // Date and Clock Functionality
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('digital-clock').innerText = now.toLocaleString();
+        }
+        setInterval(updateClock, 1000);
+
+        // Weather Data
+        const weatherData = [
+            { date: 'Dec 1', temp: 2, condition: 'Snowy ❄️', historicalTemp: -1 },
+            { date: 'Dec 2', temp: 3, condition: 'Cloudy ☁️', historicalTemp: 0 },
+            { date: 'Dec 3', temp: 1, condition: 'Snowy ❄️', historicalTemp: -2 },
+            { date: 'Dec 4', temp: -1, condition: 'Sunny ☀️', historicalTemp: -3 },
+            { date: 'Dec 5', temp: 0, condition: 'Windy 🌬️', historicalTemp: -2 },
+            { date: 'Dec 6', temp: 1, condition: 'Rainy 🌧️', historicalTemp: -1 },
+            { date: 'Dec 7', temp: 3, condition: 'Cloudy ☁️', historicalTemp: 0 }
+        ];
+
+        function populateWeatherTable() {
+            const tableBody = document.getElementById('weather-table');
+            tableBody.innerHTML = '';
+            weatherData.forEach(data => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${data.date}</td>
+                    <td class="temp">${data.temp}°C</td>
+                    <td>${data.condition}</td>
+                    <td class="temp">${data.historicalTemp}°C</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function updateTemperatures() {
+            const unit = document.getElementById('temp-unit').value;
+            document.querySelectorAll('.temp').forEach((cell, index) => {
+                const baseTemp = index % 2 === 0 
+                    ? weatherData[Math.floor(index / 2)].temp 
+                    : weatherData[Math.floor(index / 2)].historicalTemp;
+                const convertedTemp = unit === 'F' 
+                    ? (baseTemp * 9 / 5) + 32 
+                    : baseTemp;
+                cell.innerText = `${convertedTemp.toFixed(1)}°${unit}`;
+            });
+            drawGraph();
+        }
+
+        function drawGraph() {
+            const canvas = document.getElementById('comparison-graph');
+            const ctx = canvas.getContext('2d');
+            const todayTemps = weatherData.map(data => data.temp);
+            const pastTemps = weatherData.map(data => data.historicalTemp);
+            const xLabels = weatherData.map(data => data.date);
+            const unit = document.getElementById('temp-unit').value;
+
+            const convertTemp = temp => (unit === 'F' ? (temp * 9 / 5) + 32 : temp);
+            const todayConverted = todayTemps.map(convertTemp);
+            const pastConverted = pastTemps.map(convertTemp);
+
+            const maxTemp = Math.max(...todayConverted, ...pastConverted) + 5;
+            const minTemp = Math.min(...todayConverted, ...pastConverted) - 5;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const graphMargin = 50;
+            const graphWidth = canvas.width - graphMargin * 2;
+            const graphHeight = canvas.height - graphMargin * 2;
+
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 1;
+            ctx.font = '12px Arial';
+            const yTicks = 10;
+            for (let i = 0; i <= yTicks; i++) {
+                const y = graphMargin + (graphHeight / yTicks) * i;
+                const temp = maxTemp - ((maxTemp - minTemp) / yTicks) * i;
+                ctx.fillText(`${temp.toFixed(1)}°${unit}`, graphMargin - 40, y + 5);
+                ctx.beginPath();
+                ctx.moveTo(graphMargin, y);
+                ctx.lineTo(canvas.width - graphMargin, y);
+                ctx.stroke();
+            }
+
+            xLabels.forEach((label, index) => {
+                const x = graphMargin + (graphWidth / (xLabels.length - 1)) * index;
+                ctx.fillText(label, x - 20, canvas.height - graphMargin + 20);
+            });
+
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(graphMargin, graphMargin);
+            ctx.lineTo(graphMargin, canvas.height - graphMargin);
+            ctx.lineTo(canvas.width - graphMargin, canvas.height - graphMargin);
+            ctx.stroke();
+
+            const drawLine = (data, color) => {
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                data.forEach((temp, index) => {
+                    const x = graphMargin + (graphWidth / (xLabels.length - 1)) * index;
+                    const y = graphMargin + graphHeight - ((temp - minTemp) / (maxTemp - minTemp)) * graphHeight;
+                    if (index === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+            };
+
+            drawLine(todayConverted, 'blue');
+            drawLine(pastConverted, 'red');
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            if (body.style.backgroundColor === 'lightblue') {
+                body.style.backgroundColor = '#FFA500';
+            } else {
+                body.style.backgroundColor = 'lightblue';
+            }
+        }
+
+        function showFireworks() {
+            alert("🎆 Fireworks! Thank you for your feedback!");
+        }
+
+        populateWeatherTable();
+        drawGraph();
+    </script>
+</body>
+</html>
