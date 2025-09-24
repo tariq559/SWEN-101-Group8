@@ -12,8 +12,8 @@ public enum Manufacturer {
 
 
 public interface ComputerFunctions {
-    void doWork(double minutes);
-    void playGames(double minutes);
+    public void doWork(double minutes);
+    public void playGames(double minutes);
 }
 
 

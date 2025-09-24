@@ -236,6 +236,7 @@ Explanation:
 
 **Question 27:**
 Match each term with the best description.
+
 **Answer:**
 
 1. **abstract class** - **May define but not implement zero or more methods. May also implement methods, and declare fields and constructors. Cannot be instantiated.**
