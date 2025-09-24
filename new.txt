@@ -10,8 +10,8 @@ Checked exceptions must either be handled with a try-catch block or declared wit
 Check each statement that calls an instance (non-static) method.
 **Answer:**
 
-* **"Hello".charAt(0);** ✅
-* **new Mage("Mage", 120).attack();** ✅
+* **"Hello".charAt(0);** 
+* **new Mage("Mage", 120).attack();** 
 
 Explanation:
 
@@ -25,7 +25,7 @@ Explanation:
 Which parts of the program may directly access private methods or fields? Check all that apply.
 **Answer:**
 
-* **Other instances of the same class.** ✅
+* **Other instances of the same class.** 
 
 Explanation:
 
@@ -53,8 +53,8 @@ Explanation:
 Which of the following statements are true about Java classes.
 **Answer:**
 
-* **They should start with an upper case letter.** ✅
-* **Their name must match the name of the file they are stored in.** ✅
+* **They should start with an upper case letter.** 
+* **Their name must match the name of the file they are stored in.** 
 
 Explanation:
 
