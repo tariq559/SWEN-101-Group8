@@ -1,0 +1,327 @@
+
+**Question 3:**
+A Java program will NOT compile unless all checked exceptions are handled?
+**Answer:** True
+Checked exceptions must either be handled with a try-catch block or declared with a `throws` clause.
+
+---
+
+**Question 4:**
+Check each statement that calls an instance (non-static) method.
+**Answer:**
+
+* **"Hello".charAt(0);** ✅
+* **new Mage("Mage", 120).attack();** ✅
+
+Explanation:
+
+* `Math.pow(2, 3);` calls a static method (`pow`), so it doesn't count.
+* `Integer.parseInt("123");` calls a static method (`parseInt`), so it doesn't count.
+* `Arrays.toString(anArray);` calls a static method (`toString`), so it doesn't count.
+
+---
+
+**Question 5:**
+Which parts of the program may directly access private methods or fields? Check all that apply.
+**Answer:**
+
+* **Other instances of the same class.** ✅
+
+Explanation:
+
+* Private methods and fields are only accessible within the same class.
+* Child classes cannot access private methods or fields directly.
+* Other classes in the same package or outside the package cannot access private members.
+
+---
+
+**Question 6:**
+Arrange the steps required to develop a Java program into the correct order.
+**Answer:**
+
+1. **Edit the Java source using a text editor or IDE.**
+2. **Compile the program using javac.**
+3. **Run the program using java.**
+
+Explanation:
+
+* First, you edit the code, then compile it into bytecode, and finally, you run the program.
+
+---
+
+**Question 7:**
+Which of the following statements are true about Java classes.
+**Answer:**
+
+* **They should start with an upper case letter.** ✅
+* **Their name must match the name of the file they are stored in.** ✅
+
+Explanation:
+
+* Java class names conventionally start with an uppercase letter, and the class name should match the filename if it's public.
+* A constructor is not mandatory in a class.
+* Java classes are not declared with the `static` keyword unless they're inner static classes.
+
+---
+
+**Question 8:**
+Interpreted languages must be compiled into bytecode before running?
+**Answer:** False
+Explanation:
+An interpreted language is executed directly by the interpreter, not compiled into bytecode (like Java). Java, however, is compiled into bytecode for execution by the JVM.
+
+---
+
+**Question 9:**
+Match each code type with the best description.
+**Answer:**
+
+1. **Source Code** - Code meant for humans to read, write, and understand.
+2. **Bytecode** - Code meant to be executed on a virtual machine.
+3. **Machine Code** - Code meant to be executed directly on a computer processor.
+
+---
+
+**Question 10:**
+In Java, a File object is directly used to read data from a file?
+**Answer:** False
+Explanation:
+A `File` object in Java represents the file, but you need an `InputStream` or `Reader` to read data from the file.
+
+---
+
+**Question 11:**
+Which parts of the program may directly access protected methods or fields? Check all that apply.
+**Answer:**
+
+* **Other instances of the same class.** 
+* **Other classes in the same package.** 
+* **Child classes.** 
+
+Explanation:
+
+* Protected methods/fields can be accessed by child classes, other instances of the same class, and other classes in the same package.
+
+---
+
+**Question 12:**
+What type is at the root of the Java class hierarchy? It defines common methods for things like string conversion and equality.
+**Answer:** java.lang.Object
+
+Explanation:
+`java.lang.Object` is the root of the Java class hierarchy and provides common methods such as `toString()` and `equals()`.
+
+---
+
+**Question 13:**
+"UML" is an acronym for what?
+**Answer:** Unified Modeling Language
+
+Explanation:
+UML is a standardized modeling language used to visualize, specify, and document the structure of software systems.
+
+Here are the answers to your questions:
+
+**Question 14:**
+Match the following symbols to the state visibility they represent in UML diagram.
+**Answer:**
+
+1. **+** - **Public visibility**
+2. **-** - **Private visibility**
+3. **#** - **Protected visibility**
+
+---
+
+**Question 15:**
+The static methods in a class are accessible by other non-static methods in that same class.
+**Answer:** True
+Explanation: Static methods belong to the class itself and can be accessed by both static and non-static methods of the same class.
+
+---
+
+**Question 16:**
+Unlike Python, Java does not support default values for method parameters. How can a similar effect be achieved in Java?
+**Answer:** Overloading methods
+Explanation: Java does not support default values for parameters, but method overloading allows you to define multiple methods with the same name but different parameters.
+
+---
+
+**Question 17:**
+The main method must create an instance of a class before it can use the non-static fields in its own class.
+**Answer:** True
+Explanation: The main method is `static`, so it cannot directly access non-static fields without creating an instance of the class.
+
+---
+
+**Question 18:**
+Which of the following is the proper way to determine if two Strings contain the same sequence of characters?
+**Answer:** `string1.equals(string2)`
+Explanation: The `equals()` method is used to compare the contents of two strings, whereas `==` compares object references.
+
+---
+
+**Question 20:**
+Match each term with the best definition.
+**Answer:**
+
+1. **class** - **A blueprint or template that defines the state and behavior that belongs to some category of thing.**
+2. **object** - **An instance that contains its own copy of the state and behavior defined by its class.**
+3. **constructor** - **A special function used to create a new instance.**
+4. **field/attribute** - **A variable that belongs to a class.**
+5. **method** - **A function that belongs to a class.**
+
+---
+
+**Question 21:**
+What is the proper signature for the special method that a class must implement in order to be able to compare itself to other classes for equality?
+**Answer:** `public boolean equals(Object obj)`
+Explanation: This is the method signature that must be overridden to compare objects for equality in Java.
+
+---
+
+**Question 22:**
+Which of the following MAY implement one or more interfaces?
+**Answer:**
+
+* **Interface**
+* **Class**
+* **Abstract Class**
+  Explanation: Both classes and abstract classes can implement interfaces, and interfaces can extend other interfaces.
+
+---
+
+**Question 23:**
+Which of the following MUST implement ALL inherited abstract methods?
+**Answer:** **Class**
+Explanation: A regular class must implement all inherited abstract methods from its abstract superclass or interface.
+
+---
+
+**Question 24:**
+Which of the following have access to class state which is declared public?
+**Answer:**
+
+* **Child Classes**
+* **Classes in the same package**
+* **Everyone**
+  Explanation: Public fields or methods are accessible to everyone, including child classes and other classes in the same package.
+
+---
+ 
+**Question 25:**
+Which of the following MAY include non-static state and/or behavior?
+**Answer:** **Class**
+Explanation:
+
+* A **Class** can have both static and non-static state (fields) and behavior (methods).
+* An **Interface** can only declare static methods, and an **Abstract Class** can include both static and non-static methods, but typically, it’s the class that holds non-static state/behavior.
+
+---
+
+**Question 26:**
+Which of the following MAY include static state and/or behavior?
+**Answer:**
+
+* **Class**
+* **Abstract Class**
+* **Interface**
+
+Explanation:
+
+* A **Class** can have both static and non-static state/behavior.
+* An **Abstract Class** can have static methods and non-static methods.
+* An **Interface** can include static methods (since Java 8), but cannot have instance fields.
+
+---
+
+**Question 27:**
+Match each term with the best description.
+**Answer:**
+
+1. **abstract class** - **May define but not implement zero or more methods. May also implement methods, and declare fields and constructors. Cannot be instantiated.**
+2. **interface** - **Used to define but not implement zero or more methods. May include static state and methods. Cannot define constructors or non-static state. Cannot be instantiated.**
+3. **superclass** - **The parent class in a parent/child relationship.**
+4. **extends** - **Establishes a parent/child relationship between two classes.**
+5. **abstract method** - **A definition without an implementation - not allowed to have a body.**
+6. **implements** - **Creates an inheritance relationship between a class and an interface.**
+7. **subclass** - **The child class in a parent/child relationship.**
+
+---
+
+**Question 28:**
+Which of the following have access to class state which is declared without an access modifier?
+**Answer:** **Classes in the same package**
+Explanation:
+
+* If a class member has no access modifier (default access), it is accessible only within the same package, but not outside of it.
+
+---
+
+**Question 29:**
+Check each statement below that is true with respect to polymorphism.
+**Answer:**
+
+* **Polymorphism is a benefit of inheritance.** 
+* **A parent class can be used in place of any of its children.** 
+* **What appears to be one method at compile time may be a different method at runtime.** 
+* **A child can be passed as an argument into a method that declares a parameter of the parent's type.** 
+
+Explanation:
+
+* All statements describe aspects of polymorphism, which allows objects of different types to be treated as objects of a common supertype and methods to be invoked dynamically at runtime based on the actual object type.
+
+---
+
+**Question 30:**
+Which of the following statements is true regarding extending abstract classes?
+**Answer:** **Child classes must make abstract methods concrete.**
+Explanation:
+
+* **Child classes must implement all abstract methods** from an abstract class unless the child class is also declared abstract.
+* **Child classes can choose which abstract methods to make concrete**—they are required to implement all abstract methods that are not abstract themselves.
+
+
+
+--------------------------------
+
+Question 2:
+Which parts of the program may directly access public methods or fields?
+Answer:
+
+Other instances of the same class. 
+
+Child classes. 
+
+Other classes in the same package. 
+
+Any part of the program. 
+
+
+Question 6:
+Which statements about Java arrays are correct?
+Answer:
+
+Java array elements are accessed using [x] notation where 0 <= x < array.length 
+
+Any Java type can be stored in an array (primitives + references) 
+
+Java arrays are fixed length 
+
+
+Question 7:
+Which may directly access private methods or fields?
+Answer:
+
+Other instances of the same class. 
+Explanation: Private members can only be accessed within the same class.
+
+
+Question 9:
+Compiler error fix for checked exception?
+Answer:
+
+Declare that bMethod throws ACheckedException. 
+
+Surround the call to aMethod in a try/catch. 
+
+Explanation: Checked exceptions must be either handled with a try-catch block or declared to be thrown.
