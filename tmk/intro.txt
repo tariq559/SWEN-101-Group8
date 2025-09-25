@@ -47,6 +47,12 @@ public class NameMaker {
     }
 }
 
+//Main code provied after Random method isn't required,
+//its only used for checking methods,
+//GO TO NEXT CODE!!
+
+
+
 //Animal.java// 
 
 
